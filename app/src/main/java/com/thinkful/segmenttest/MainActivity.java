@@ -20,14 +20,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        Analytics.with(getApplicationContext()).screen("Main Activity", null); //records screen event
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "recorded with Segment", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                Analytics.with(getApplicationContext()).track("Action button ", new Properties().putValue("send", "email"));
+                //records user event
+                Analytics.with(getApplicationContext()).track("Email button clicked ", null); /* can also use a property for additional data, ie new Properties().putValue("name", "email button")*/
             }
         });
     }
